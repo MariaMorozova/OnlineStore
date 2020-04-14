@@ -1,9 +1,10 @@
-import 'categories_grid_view_item.dart';
-import 'package:flutter/material.dart';
-import 'categories.dart';
 import 'categories_api.dart';
+import 'categories.dart';
+import 'categories_grid_view_item.dart';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:onlinestore/base_api.dart';
 
 class CategoriesList extends StatelessWidget {
   final List<MyCategory> categories;
@@ -44,8 +45,8 @@ class _CategoriesListScreen extends State<CategoriesListScreen> {
 
   FutureBuilder<List<MyCategory>> _buildBody() {
     return FutureBuilder<List<MyCategory>>(
-        future: CategoryApi.loadCategories(http.Client()),
-        builder: (context, snapshot) {
+      future:  BaseApi.loadJson(http.Client(), CategoryApi.categoryUrl).then((value) => CategoryApi.loadCategoriesList(value)),
+      builder: (context, snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
           }

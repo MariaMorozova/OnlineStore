@@ -3,6 +3,7 @@ import 'package:onlinestore/categories/categories_list_screen.dart';
 import 'package:onlinestore/products/product_grid_view_Item.dart';
 import 'products.dart';
 import 'products_api.dart';
+import 'package:onlinestore/base_api.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -44,17 +45,30 @@ class _ProductListScreen extends State<ProductListScreen> {
                 icon: Icon(Icons.category, color: Colors.white,),
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriesListScreen()));
-                },
-			),
+                }),
           ],
         ),
         body: _buildBody(),
+
+      /*drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+                accountName: Text("User name"),
+                accountEmail: Text("User email"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.person),
+              ),)
+          ],
+        ),
+      ),*/ //Drawer
     );
   }
 
   FutureBuilder<List<Product>> _buildBody() {
     return FutureBuilder<List<Product>>(
-      future: ProductApi.loadProductList(http.Client()),
+      future: BaseApi.loadJson(http.Client(), ProductApi.productUrl).then((value) => ProductApi.loadProductList(value)),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           print(snapshot.error);
