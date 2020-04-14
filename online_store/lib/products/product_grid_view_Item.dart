@@ -9,10 +9,8 @@ class ProductGridViewItem extends StatelessWidget{
     this.product = product;
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
         child:
         Column(
@@ -20,9 +18,7 @@ class ProductGridViewItem extends StatelessWidget{
             Image.network(product.imageUrl, height: 100, ),
             Text(product.title),
             Text(product.price.toString() + " руб"),
-
           ],
-
         )
     );
   }

@@ -1,14 +1,14 @@
-class Categories {
+class MyCategory {
   final String title;
   final String imageUrl;
 
-  Categories({
+  MyCategory({
     this.title,
     this.imageUrl,
   });
 
-  factory Categories.fromJson(Map<String, dynamic> json) {
-    return Categories(
+  factory MyCategory.fromJson(Map<String, dynamic> json) {
+    return MyCategory(
         title: json['title'] as String,
         imageUrl: json['imageUrl'] as String,
     );
